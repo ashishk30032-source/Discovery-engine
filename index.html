@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retrieval Insights Engine — Google Photos Qualitative Discovery</title>
+  <meta name="description" content="AI-powered qualitative feedback analysis dashboard for Google Photos search and retrieval failure taxonomy." />
+
+  <!-- Google Fonts: Inter and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS 3 CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
+          },
+          colors: {
+            google: {
+              blue: '#1a73e8',
+              red: '#ea4335',
+              yellow: '#fbbc04',
+              green: '#34a853',
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.25s ease-out forwards',
+            scaleUp: 'scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(6px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            scaleUp: {
+              '0%': { opacity: '0', transform: 'scale(0.96)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- React 18 & ReactDOM 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Babel Standalone for JSX compilation in browser -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(156, 163, 175, 0.7);
+    }
+  </style>
+</head>
+<body class="h-full antialiased selection:bg-blue-500 selection:text-white bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+  <div id="root">
+    <!-- Initial Loading State while Babel transpiles React code -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-6 text-center space-y-4">
+      <div class="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-rose-500 flex items-center justify-center shadow-lg shadow-blue-500/25 animate-pulse">
+        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <div>
+        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Retrieval Insights Engine</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Initializing qualitative discovery dashboard...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Load Data and Services as ES Modules -->
+  <script type="module" src="./sampleData.js"></script>
+  <script type="module" src="./llmService.js"></script>
+
+  <!-- 2. Load React App Component with Babel transpiler -->
+  <script type="text/babel" src="./app.jsx"></script>
+
+  <!-- 3. Mount React App into #root -->
+  <script type="text/babel">
+    function mountApp() {
+      if (window.App) {
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(React.createElement(window.App));
+      } else {
+        setTimeout(mountApp, 25);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mountApp);
+    } else {
+      mountApp();
+    }
+  </script>
+</body>
+</html>
